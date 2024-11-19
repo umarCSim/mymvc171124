@@ -16,8 +16,8 @@ namespace MyMVC161124.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var cats = await _catApiService.GetSampleCatsAsync();
-            return View();
+            var cats = await _catApiService.GetSampleCatsAsync(1);
+            return View(cats);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace MyMVC161124.Services.Implementation
         }
 
         async Task<List<Cat>> ICatApiService.GetSampleCatsAsync(int count)
-        {//C:\gh\mvc\Cats\wwwroot\tempdata\cat_temp_data.json
+        {//Data/cat_temp_data.json
             var fileDirectory = Path.Combine(_env.ContentRootPath, "Data", "cat_temp_data.json");
 
             if (!File.Exists(fileDirectory))
@@ -59,8 +59,9 @@ namespace MyMVC161124.Services.Implementation
 
             var jsonData = await File.ReadAllTextAsync(fileDirectory);
             var deserializedJson = JsonSerializer.Deserialize<List<Cat>>(jsonData);
+            var listOfCats = deserializedJson.Take(count).ToList();
 
-            return deserializedJson;
+            return listOfCats;
         }
 
         public class ServiceException : Exception
