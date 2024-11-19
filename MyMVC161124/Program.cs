@@ -1,7 +1,11 @@
+using MyMVC161124.Services.Implementation;
+using MyMVC161124.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<ICatApiService, CatApiService>();
 
 var app = builder.Build();
 
