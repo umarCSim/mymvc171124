@@ -21,14 +21,14 @@ namespace MyMVC161124.Services.Implementation
             _env = env;
         }
 
-        async Task<List<Cat>> ICatApiService.GetCatsAsync(int count)
+        async Task<List<CatImages>> ICatApiService.GetCatsAsync(int count)
         {
             try
             {
                 var response = await _httpClient.GetAsync($"{_apiUrl}?limit={count}");
                 response.EnsureSuccessStatusCode();
 
-                var responseContent = await response.Content.ReadFromJsonAsync<List<Cat>>();
+                var responseContent = await response.Content.ReadFromJsonAsync<List<CatImages>>();
                 if (responseContent is null)
                 {
                     throw new InvalidOperationException($"Received an empty jsonData from the {nameof(_httpClient)}");
@@ -46,22 +46,6 @@ namespace MyMVC161124.Services.Implementation
                 Console.WriteLine($"An unknown error occured while trying to retrieve cats. {ex.Message}");
                 throw new ServiceException("Something happened and I'm not sure what... :(", ex);
             }
-        }
-
-        async Task<List<Cat>> ICatApiService.GetSampleCatsAsync(int count)
-        {//Data/cat_temp_data.json
-            var fileDirectory = Path.Combine(_env.ContentRootPath, "Data", "cat_temp_data.json");
-
-            if (!File.Exists(fileDirectory))
-            {
-                throw new FileNotFoundException($"File: {fileDirectory} does not exist");
-            }
-
-            var jsonData = await File.ReadAllTextAsync(fileDirectory);
-            var deserializedJson = JsonSerializer.Deserialize<List<Cat>>(jsonData);
-            var listOfCats = deserializedJson.Take(count).ToList();
-
-            return listOfCats;
         }
 
         public class ServiceException : Exception
