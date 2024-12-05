@@ -21,7 +21,7 @@ namespace MyMVC161124.Services.Implementation
             _env = env;
         }
 
-        async Task<List<CatImages>> ICatApiService.GetCatsAsync(int count)
+        async Task<List<CatImages>> ICatApiService.GetListOfCatImagesAsync(int count)
         {
             try
             {
