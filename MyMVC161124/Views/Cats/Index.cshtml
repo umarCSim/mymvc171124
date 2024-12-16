@@ -9,10 +9,11 @@
 </head>
 <body>
     <div class="d-flex justify-content-center align-items-center vh-100">
-        @foreach (var cat in Model)
-        {
-            <img src="@cat.Url" width="@cat.Width" height="@cat.Height"/>
-        }
+@*         <img id="current-image"
+        src="@Model.FirstOrDefault()?.Url : @Environment.CurrentDirectory"
+        /> *@
+        <!--TODO: Need to test that the cat-error shows when model is null->
+        <img src="~/images/cat-error.jpg" />
     </div>
 </body>
 </html>

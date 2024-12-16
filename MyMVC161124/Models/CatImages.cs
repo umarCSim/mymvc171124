@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 namespace MyMVC161124.Models
 {
     public class CatImages
-    {
+    {//TODO: Need to map this
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
